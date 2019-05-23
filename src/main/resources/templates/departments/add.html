@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <nav>
+        <a href="/">Home</a>
+        <span>  |  </span>
+        <a href="/departments">Departments</a>
+        <span>  |  </span>
+        <a href="/lectors">Lectors</a>
+    </nav>
+
+    <br>
+
+    <form method="post" th:object="${department}">
+
+        <div class="form-group">
+            <label th:for="departmentName">Department Name</label>
+            <br>
+            <input th:field="*{departmentName}">
+            <span th:errors="*{departmentName}" class="error"></span>
+            <br>
+        </div>
+
+        <input type="submit" value="Create Lector">
+    </form>
+
+
+</body>
+</html>

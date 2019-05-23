@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<nav>
+    <a href="/">Home</a>
+    <span>  |  </span>
+    <a href="/departments">Departments</a>
+    <span>  |  </span>
+    <a href="/lectors">Lectors</a>
+</nav>
+
+
+    <h1 th:text="${title}">Default Title</h1>
+
+    <ul>
+        <!--<h2 th:if="lectors.isEmpty()"></h2>-->
+        <li th:each="lector: ${lectors}">
+            <!---->
+            <!---->
+            <a href="#">
+                <span th:text="${lector.firstName}">default first name</span>
+                <span>  </span>
+                <span th:text="${lector.lastName}">default last name</span>
+                <span>  </span>
+                <span th:text="${lector.degree}">default last name</span>
+                <span>  works in : </span>
+                <span th:text="${#lists.size(lector.departments)}"></span>
+                <span> departments</span>
+            </a>
+            <br>
+        </li>
+
+    </ul>
+
+    <nav>
+        <a href="/lectors/add">Add</a>
+        <!--<span>  |  </span>-->
+        <!--<a href="">Remove</a>-->
+    </nav>
+
+</body>
+</html>

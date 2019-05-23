@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <nav>
+        <a href="/">Home</a>
+        <span>  |  </span>
+        <a href="/departments">Departments</a>
+        <span>  |  </span>
+        <a href="/lectors">Lectors</a>
+    </nav>
+
+    <br>
+
+    <form method="post" th:object="${lector}">
+        <div class="form-group">
+            <label th:for="firstName">firstName</label>
+            <br>
+            <input th:field="*{firstName}">
+            <span th:errors="*{firstName}" class="error"></span>
+            <br>
+
+            <label th:for="lastName">lastName:</label>
+            <br>
+            <input th:field="*{lastName}">
+            <span th:errors="*{lastName}" class="error"></span>
+            <br>
+
+            <!--<label th:for="degree">degree:</label>-->
+            <!--<br>-->
+            <!--<input th:field="*{degree}">-->
+            <select name="degree">
+                <option th:each="degree : ${T( com.example.demo.model.Lector.Degree).values()}" th:value="${degree}" th:text="${degree.degree}"></option>
+            </select>
+
+            <!--<span th:errors="*{degree}" class="error"></span>-->
+            <br>
+
+            <label th:for="salary">salary:</label>
+            <br>
+            <input th:field="*{salary}">
+            <span th:errors="*{salary}" class="error"></span>
+            <br>
+        </div>
+
+        <input type="submit" value="Create Lector">
+    </form>
+
+</body>
+</html>

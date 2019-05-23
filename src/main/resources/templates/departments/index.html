@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <nav>
+        <a href="/">Home</a>
+        <span>  |  </span>
+        <a href="/departments">Departments</a>
+        <span>  |  </span>
+        <a href="/lectors">Lectors</a>
+    </nav>
+
+    <h1>Departments:</h1>
+
+    <ul>
+        <li th:each="department: ${departments}">
+            <a href="">
+                <span th:text="${department.departmentName}"></span>
+                <span>  workers: </span>
+                <span th:text="${#lists.size(department.lectors)}"></span>
+            </a>
+        </li>
+    </ul>
+
+    <nav>
+        <a href="/departments/add">Add</a>
+    </nav>
+</body>
+</html>
