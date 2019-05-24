@@ -2,9 +2,7 @@ package com.example.demo.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 @Table(name = "lector", uniqueConstraints = {
@@ -20,7 +18,7 @@ public class Lector {
     private String lastName;
 
     @ManyToMany(mappedBy = "lectors")
-    List<Department> departments;
+    private Set<Department> departments;
 
     private Integer salary;
 
@@ -44,7 +42,7 @@ public class Lector {
 
     public Lector() {
         this.id = UUID.randomUUID().toString();
-        this.departments = new ArrayList<>();
+        this.departments = new HashSet<>();
     }
 
     public Lector(String firstName, String lastName, Degree degree, Integer salary) {
@@ -92,11 +90,11 @@ public class Lector {
         this.degree = degree;
     }
 
-    public List<Department> getDepartments() {
+    public Set<Department> getDepartments() {
         return departments;
     }
 
-    public void setDepartments(List<Department> departments) {
+    public void setDepartments(Set<Department> departments) {
         this.departments = departments;
     }
 

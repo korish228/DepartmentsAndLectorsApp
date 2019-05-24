@@ -45,7 +45,7 @@ public class LectorController {
 //        }
 
         this.lectorRepository.save(lector);
-        return "redirect: index";
+        return "redirect:/";
     }
 
 

@@ -1,9 +1,7 @@
 package com.example.demo.model;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 @Table(name = "departments", uniqueConstraints = {
@@ -15,12 +13,14 @@ public class Department {
     private String id;
     @Column(name = "department_name", unique = true)
     private String departmentName;
-//    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "departments")
+//    !!!
+//    private String head_of_department_name;
+
     @ManyToMany
-    private List<Lector> lectors;
+    private Set<Lector> lectors;
 
     public Department() {
-        this.lectors = new ArrayList<>();
+        this.lectors = new HashSet<>();
         this.id = UUID.randomUUID().toString();
     }
 
@@ -50,13 +50,14 @@ public class Department {
         this.departmentName = departmentName;
     }
 
-    public List<Lector> getLectors() {
+    public Set<Lector> getLectors() {
         return lectors;
     }
 
-    public void setLectors(List<Lector> lectors) {
+    public void setLectors(Set<Lector> lectors) {
         this.lectors = lectors;
     }
+
 
     @Override
     public String toString() {
@@ -65,5 +66,9 @@ public class Department {
                 ", departmentName='" + departmentName + '\'' +
                 ", lectors=" + lectors +
                 '}';
+    }
+
+    public void addItem(Lector lector) {
+        this.lectors.add(lector);
     }
 }

@@ -17,13 +17,16 @@
 
     <ul>
         <li th:each="department: ${departments}">
-            <a href="">
+            <a th:href="'/departments/view/' + ${department.id}">
                 <span th:text="${department.departmentName}"></span>
                 <span>  workers: </span>
                 <span th:text="${#lists.size(department.lectors)}"></span>
             </a>
+            <a href="/departments/view/"></a>
         </li>
     </ul>
+
+
 
     <nav>
         <a href="/departments/add">Add</a>

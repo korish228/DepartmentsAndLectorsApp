@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <nav>
+        <a href="/">Home</a>
+        <span>  |  </span>
+        <a href="/departments">Departments</a>
+        <span>  |  </span>
+        <a href="/lectors">Lectors</a>
+    </nav>
+    <br>
+
+
+    <h1 th:text="${title}">Default Title</h1>
+
+
+    <br>
+
+    <form method="post" th:object="${form}" action="/departments/add-item" >
+
+        <div class="form-group">
+            <label th:for="lectorId">Lector</label>
+            <select name="lectorId" >
+                <option th:each="lector : *{lectors}" th:text="${lector.firstName}" th:value="${lector.id}"></option>
+            </select>
+        <!--<ul>-->
+        <!--<li th:each="lector ${form.lectors}"></li>-->
+        <!--</ul>-->
+        </div>
+
+        <input type="hidden" name="departmentId" th:value="*{department.id}" />
+
+        <input type="submit" value="Create Lector"/>
+
+    </form>
+
+
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <nav>
+        <a href="/">Home</a>
+        <span>  |  </span>
+        <a href="/departments">Departments</a>
+        <span>  |  </span>
+        <a href="/lectors">Lectors</a>
+    </nav>
+    <br>
+
+
+    <h1 th:text="'Department ' + ${title}">Default Title</h1>
+
+    <ul>
+        <h2>Lectors:</h2>
+        <li th:each="lector: ${lectors}" th:text="${lector.firstName}"></li>
+    </ul>
+    <p th:unless="${lectors.size()}">No lectors yet</p>
+
+    <nav>
+        <a th:href="'/departments/add-item/' + ${departmentId}">Add</a>
+        <a href="'/departments/view/' + ${departmentId} ">Remove Department</a>
+        <a th:href="'/departments/statistics/' + ${departmentId}">Check Statistics</a>
+    </nav>
+
+</body>
+</html>

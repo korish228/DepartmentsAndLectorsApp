@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <div class="top_line" >
+        <nav>
+            <a href="/lectors">Lectors</a>
+            <span>  |  </span>
+            <a href="/departments">Departments</a>
+        </nav>
+    </div>
+
+    <br>
+
+    <h1 th:text="${title}">Default Title</h1>
+    <!--<br>-->
+
+    <!--<p>assistants in in this department: 0</p>-->
+    <!--<br>-->
+
+    <!--<p>  associate professors in in this department: 0</p>-->
+    <!--<br>-->
+
+    <!--<p> professors in in this department: 0</p>-->
+    <!--<br>-->
+
+    <!--<p> avarage salary in this department: 1000$</p>-->
+
+
+    <p th:text="'assistants in this department: ' + ${amountOfAssistants}"></p>
+    <!--<br>-->
+
+    <p th:text="'associate professors in this department: ' + ${amountOfAssociateProfessors}"></p>
+    <!--<br>-->
+
+    <p th:text="'professors in this department: ' + ${amountOfProfessors}"></p>
+    <br>
+
+    <p th:text="'avarage salary in this department: '+ ${avgSalary}"></p>
+
+    <!--model.addAttribute("assistants", assistants);-->
+    <!--model.addAttribute("associateProfessors", associateProfessors);-->
+    <!--model.addAttribute("professors", professors);-->
+</body>
+</html>
