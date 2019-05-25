@@ -1,6 +1,9 @@
 package com.example.demo.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.*;
 
 @Entity
@@ -12,9 +15,14 @@ public class Department {
     @Column(name = "department_id")
     private String id;
     @Column(name = "department_name", unique = true)
+    @NotNull
+    @Size(min = 2)
     private String departmentName;
-//    !!!
-//    private String head_of_department_name;
+
+
+    @ManyToOne
+//    @JoinColumn(name = "head_of_department")
+    private Lector headOfDepartment;
 
     @ManyToMany
     private Set<Lector> lectors;
@@ -24,13 +32,14 @@ public class Department {
         this.id = UUID.randomUUID().toString();
     }
 
-    public Department(String departmentName) {
+    public Department(String departmentName, Lector headOfDepartment) {
         this();
         this.departmentName = departmentName;
+        this.headOfDepartment = headOfDepartment;
     }
 
-    public Department(String id, String departmentName) {
-        this(departmentName);
+    public Department(String id, String departmentName,Lector headOfDepartment) {
+        this(departmentName, headOfDepartment);
         this.id = id;
     }
 
@@ -50,6 +59,14 @@ public class Department {
         this.departmentName = departmentName;
     }
 
+    public Lector getHeadOfDepartment() {
+        return headOfDepartment;
+    }
+
+    public void setHeadOfDepartment(Lector headOfDepartment) {
+        this.headOfDepartment = headOfDepartment;
+    }
+
     public Set<Lector> getLectors() {
         return lectors;
     }
@@ -58,17 +75,17 @@ public class Department {
         this.lectors = lectors;
     }
 
+    public void addItem(Lector lector) {
+        this.lectors.add(lector);
+    }
 
     @Override
     public String toString() {
         return "Department{" +
                 "id='" + id + '\'' +
                 ", departmentName='" + departmentName + '\'' +
+                ", headOfDepartment=" + headOfDepartment +
                 ", lectors=" + lectors +
                 '}';
-    }
-
-    public void addItem(Lector lector) {
-        this.lectors.add(lector);
     }
 }

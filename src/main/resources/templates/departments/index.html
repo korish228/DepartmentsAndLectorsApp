@@ -3,33 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+
 </head>
 <body>
-    <nav>
-        <a href="/">Home</a>
-        <span>  |  </span>
-        <a href="/departments">Departments</a>
-        <span>  |  </span>
-        <a href="/lectors">Lectors</a>
-    </nav>
-
-    <h1>Departments:</h1>
-
-    <ul>
-        <li th:each="department: ${departments}">
-            <a th:href="'/departments/view/' + ${department.id}">
-                <span th:text="${department.departmentName}"></span>
-                <span>  workers: </span>
-                <span th:text="${#lists.size(department.lectors)}"></span>
-            </a>
-            <a href="/departments/view/"></a>
-        </li>
-    </ul>
 
 
+    <div th:replace="fragments/topline :: topline">&nbsp;</div>
 
-    <nav>
-        <a href="/departments/add">Add</a>
-    </nav>
+    <div class="content">
+        <ul th:if="${not #lists.isEmpty(departments)}">
+            <li th:each="department: ${departments}">
+                <a th:href="'/departments/view/' + ${department.id}">
+                    <span th:text="${department.departmentName}"></span>
+                    <span>  workers: </span>
+                    <span th:text="${#lists.size(department.lectors)}"></span>
+                </a>
+                <a href="/departments/view/"></a>
+            </li>
+        </ul>
+
+        <p th:unless="${not #lists.isEmpty(departments)}">No departments yet</p>
+        <nav>
+            <a class="add_btn" href="/departments/add">Add</a>
+        </nav>
+
+    </div>
+
+
+
+
+
+
+    <div th:replace="fragments/styles :: style">&nbsp;</div>
 </body>
 </html>

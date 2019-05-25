@@ -26,7 +26,6 @@ public class LectorController {
     }
 
     @GetMapping("/add")
-//    @RequestMapping(value = "/add")
     public String add(Model model){
         model.addAttribute("title", "Add Lector:");
         model.addAttribute("lector", new Lector());
@@ -38,24 +37,14 @@ public class LectorController {
     public String add(Model model, @ModelAttribute @Valid Lector lector, Errors errors){
 
 
-//        if (errors.hasErrors()){
-//            model.addAttribute("title", "Add Lector:");
-//            model.addAttribute(errors);
-//            return "lectors/add";
-//        }
+        if (errors.hasErrors()){
+            model.addAttribute("title", "Add Lector:");
+            model.addAttribute(errors);
+            return "lectors/add";
+        }
 
         this.lectorRepository.save(lector);
         return "redirect:/";
     }
-
-
-//
-//    @GetMapping
-//    @RequestMapping("/{id}")
-//    public String currentLectors(@PathVariable String id, Model model){
-//        Lector lector = lectorRepository.findLectorById(id);
-//        model.addAttribute("lector", lector);
-//        return "lectors/lectors";
-//    }
 
 }

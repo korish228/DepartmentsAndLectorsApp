@@ -30,30 +30,43 @@ public class DepartmentController {
     public String departments(Model model){
         List<Department> departments = departmentRepository.findAll();
         model.addAttribute("departments", departments);
+        model.addAttribute("title", "Departments:" );
         return "departments/index";
     }
 
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String add(Model model){
-        List<Department> departments = departmentRepository.findAll();
+
+        Department department = new Department();
+
         model.addAttribute("title", "Add new Department");
-        model.addAttribute("department",new Department());
+        model.addAttribute("department", department);
+        model.addAttribute("lectors", this.lectorRepository.findAll());
+
+
         return "departments/add";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String add(Model model , @ModelAttribute @Valid Department department , Errors errors){
         System.out.println(department);
+
         if (errors.hasErrors()){
             model.addAttribute("title", "Add new Department");
+            model.addAttribute("department", department);
+            model.addAttribute("lectors", this.lectorRepository.findAll());
             return "departments/add";
         }
 
-        this.departmentRepository.save(department);
+        department.addItem(department.getHeadOfDepartment());
 
+        this.departmentRepository.save(department);
         return "redirect:view/" + department.getId();
     }
+
+
+
 
     @GetMapping
     @RequestMapping("/view/{departmentId}")
@@ -62,19 +75,41 @@ public class DepartmentController {
         Department department = this.departmentRepository.findById(departmentId).get();
 
 
-        model.addAttribute("title", department.getDepartmentName());
+        model.addAttribute("title", "Department - " + department.getDepartmentName());
         model.addAttribute("lectors", department.getLectors());
         model.addAttribute("departmentId", department.getId());
+        model.addAttribute("head", department.getHeadOfDepartment().getFirstName() + " " + department.getHeadOfDepartment().getLastName());
         return "departments/view";
     }
-//
-//    
 
-    @RequestMapping(value = "/view/{departmentId}", method = RequestMethod.DELETE)
-    public String delete(@PathVariable String departmentId, Model model){
 
-        this.departmentRepository.deleteById(departmentId);
-        return "redirect:/departments";
+    @GetMapping
+    @RequestMapping("/add-item/{departmentId}")
+    public String addItem(@PathVariable String departmentId, Model model){
+
+        Department department = this.departmentRepository.findById(departmentId).get();
+
+        AddMenuItemForm form = new AddMenuItemForm(this.lectorRepository.findAll(), department);
+        model.addAttribute("title", "Add item to department " + department.getDepartmentName());
+        model.addAttribute("form", form);
+        return "departments/add-item";
+    }
+
+    @PostMapping
+    @RequestMapping("/add-item")
+    public String addItem(Model model, @ModelAttribute @Valid AddMenuItemForm form, Errors errors){
+
+        if (errors.hasErrors()){
+            model.addAttribute("form", form);
+            return "departments/add-item";
+        }
+
+        Lector lector = this.lectorRepository.findById(form.getLectorId()).get();
+        Department department =this.departmentRepository.findById(form.getDepartmentId()).get();
+        department.addItem(lector);
+        System.out.println(department.getLectors());
+        this.departmentRepository.save(department);
+        return "redirect:/departments/view/" + department.getId();
     }
 
     @GetMapping
@@ -90,7 +125,6 @@ public class DepartmentController {
 
         model.addAttribute("title", "Statistic of " + department.getDepartmentName());
         model.addAttribute("lectors", department.getLectors());
-
         model.addAttribute("amountOfAssistants", assistants);
         model.addAttribute("amountOfAssociateProfessors", associateProfessors);
         model.addAttribute("amountOfProfessors", professors);
@@ -100,71 +134,4 @@ public class DepartmentController {
         return "departments/statistics";
     }
 
-    @GetMapping
-    @RequestMapping("/add-item/{departmentId}")
-    public String addItem(@PathVariable String departmentId, Model model){
-
-        Department department = this.departmentRepository.findById(departmentId).get();
-
-        AddMenuItemForm form = new AddMenuItemForm(this.lectorRepository.findAll(), department);
-        model.addAttribute("title", "Add item to department " + department.getDepartmentName());
-//        System.out.println(form);
-        model.addAttribute("form", form);
-        return "departments/add-item";
-    }
-
-    @PostMapping
-    @RequestMapping("/add-item")
-    public String addItem(Model model, @ModelAttribute @Valid AddMenuItemForm form, Errors errors){
-
-//        System.out.println(form);
-
-        if (errors.hasErrors()){
-            model.addAttribute("form", form);
-            return "departments/add-item";
-        }
-
-        Lector lector = this.lectorRepository.findById(form.getLectorId()).get();
-        Department department =this.departmentRepository.findById(form.getDepartmentId()).get();
-        department.addItem(lector);
-        System.out.println(department.getLectors());
-        this.departmentRepository.save(department);
-        return "redirect:/departments/view/" + department.getId();
-    }
-
-
-
-
-
-
-
-
-//    @GetMapping
-//    @RequestMapping("/{id}")
-//    public String add(@PathVariable String id, Model model){
-//
-//        Department department = this.departmentRepository.findById(id).get();
-//        model.addAttribute("name", department.getDepartmentName());
-//        model.addAttribute("lectors", department.getLectors());
-//        model.addAttribute("depId", department.getId());
-//        return "departments/view";
-//    }
-//
-//    @GetMapping
-//    @RequestMapping("/{id}/addLector")
-//    public String addLectorToDepartment(@PathVariable String id, Model model) {
-//
-//        Department department = this.departmentRepository.findById(id).get();
-//        AddMenuItemForm form = new AddMenuItemForm(this.lectorRepository.findAll(), department);
-////
-//        model.addAttribute("title", "Add item to Department: " + department.getDepartmentName());
-////        model.addAttribute("depId", department.getId());
-//        model.addAttribute("form", form);
-////        model.addAttribute("lectors", this.lectorRepository.findAll());
-//        return "departments/addLector";
-//    }
-
-//    @PostMapping
-//    @RequestMapping("/new")
-//    public String currentDepartments
 }

@@ -3,32 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
 </head>
 <body>
 
-    <nav>
-        <a href="/">Home</a>
-        <span>  |  </span>
-        <a href="/departments">Departments</a>
-        <span>  |  </span>
-        <a href="/lectors">Lectors</a>
-    </nav>
-    <br>
+
+    <div th:replace="fragments/topline :: topline">&nbsp;</div>
+
+    <div class="content">
+        <p th:text="'head of department is - ' + ${head}"></p>
+
+        <ul>
+            <h2>Lectors:</h2>
+            <li th:each="lector: ${lectors}">
+                <span th:text="${lector.firstName}"></span>
+                <span th:text="${lector.lastName}"></span>
+            </li>
+        </ul>
 
 
-    <h1 th:text="'Department ' + ${title}">Default Title</h1>
+        <nav>
+            <a class="add_btn" th:href="'/departments/add-item/' + ${departmentId}">Add</a>
+            <!--<a href="'/departments/view/' + ${departmentId} ">Remove Department</a>-->
+            <a class="btn" th:href="'/departments/statistics/' + ${departmentId}">Check Statistics</a>
+        </nav>
+    </div>
 
-    <ul>
-        <h2>Lectors:</h2>
-        <li th:each="lector: ${lectors}" th:text="${lector.firstName}"></li>
-    </ul>
-    <p th:unless="${lectors.size()}">No lectors yet</p>
 
-    <nav>
-        <a th:href="'/departments/add-item/' + ${departmentId}">Add</a>
-        <a href="'/departments/view/' + ${departmentId} ">Remove Department</a>
-        <a th:href="'/departments/statistics/' + ${departmentId}">Check Statistics</a>
-    </nav>
+    <div th:replace="fragments/styles :: style">&nbsp;</div>
 
 </body>
 </html>

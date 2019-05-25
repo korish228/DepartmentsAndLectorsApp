@@ -3,47 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
 </head>
 <body>
 
-    <div class="top_line" >
-        <nav>
-            <a href="/lectors">Lectors</a>
-            <span>  |  </span>
-            <a href="/departments">Departments</a>
-        </nav>
+
+    <div th:replace="fragments/topline :: topline">&nbsp;</div>
+
+    <div class="content">
+        <p th:text="'assistants in this department: ' + ${amountOfAssistants}"></p>
+        <p th:text="'associate professors in this department: ' + ${amountOfAssociateProfessors}"></p>
+        <p th:text="'professors in this department: ' + ${amountOfProfessors}"></p>
+        <p th:text="'avarage salary in this department: '+ ${avgSalary}"></p>
     </div>
 
-    <br>
 
-    <h1 th:text="${title}">Default Title</h1>
-    <!--<br>-->
+    <div th:replace="fragments/styles :: style">&nbsp;</div>
 
-    <!--<p>assistants in in this department: 0</p>-->
-    <!--<br>-->
-
-    <!--<p>  associate professors in in this department: 0</p>-->
-    <!--<br>-->
-
-    <!--<p> professors in in this department: 0</p>-->
-    <!--<br>-->
-
-    <!--<p> avarage salary in this department: 1000$</p>-->
-
-
-    <p th:text="'assistants in this department: ' + ${amountOfAssistants}"></p>
-    <!--<br>-->
-
-    <p th:text="'associate professors in this department: ' + ${amountOfAssociateProfessors}"></p>
-    <!--<br>-->
-
-    <p th:text="'professors in this department: ' + ${amountOfProfessors}"></p>
-    <br>
-
-    <p th:text="'avarage salary in this department: '+ ${avgSalary}"></p>
-
-    <!--model.addAttribute("assistants", assistants);-->
-    <!--model.addAttribute("associateProfessors", associateProfessors);-->
-    <!--model.addAttribute("professors", professors);-->
 </body>
 </html>

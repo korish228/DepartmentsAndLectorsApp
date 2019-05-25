@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        .top_line{
+            background-color: #000;
+            width: 100%;
+            padding: 20px;
+        }
+
+        .top_line a{
+            /*margin: 20px 10px;*/
+            margin-left: 0;
+            color: #fff;
+        }
+
+        h1 {
+            margin-left: 20px;
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <div class="topline_frg" th:fragment="topline" >
+        <div class="top_line" >
+            <nav>
+                <a href="/lectors">Lectors</a>
+                <span>  |  </span>
+                <a href="/departments">Departments</a>
+            </nav>
+
+        </div>
+        <h1 th:text="${title}">Default Title</h1>
+    </div>
+
+
+
+</body>
+</html>
