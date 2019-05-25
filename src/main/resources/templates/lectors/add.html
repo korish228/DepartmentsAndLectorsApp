@@ -64,14 +64,10 @@
             <span th:errors="*{lastName}" class="error"></span>
             <br>
 
-            <!--<label th:for="degree">degree:</label>-->
-            <!--<br>-->
-            <!--<input th:field="*{degree}">-->
             <select name="degree">
                 <option th:each="degree : ${T( com.example.demo.model.Lector.Degree).values()}" th:value="${degree}" th:text="${degree.degree}"></option>
             </select>
 
-            <!--<span th:errors="*{degree}" class="error"></span>-->
             <br>
 
             <label th:for="salary">salary:</label>

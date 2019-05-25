@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface MainService {
     double averageSalary(Department department);
+    List<Lector> findByName(String name);
 }

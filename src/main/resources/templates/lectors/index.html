@@ -16,7 +16,16 @@
 <div th:replace="fragments/topline :: topline">&nbsp;</div>
 
     <div class="content">
-        <table th:if="${not #lists.isEmpty(lectors)}">
+
+        <form action="/lectors" th:if="${not #lists.isEmpty(allLectors)}">
+            <input type="text" name="name" placeholder="Search Lectors" />
+            <input type="submit" value="Search">
+
+        </form>
+
+        <p th:if="${not #lists.isEmpty(allLectors)}" th:text="'founded by your request ' + ${req} + ': '"></p>
+
+        <table th:if="${not #lists.isEmpty(allLectors)} ">
             <tr>
                 <th>firstName</th>
                 <th>lastName</th>
@@ -25,7 +34,9 @@
                 <th>degree</th>
             </tr>
 
-            <tr th:each="lector: ${lectors}">
+
+
+            <tr  th:each="lector: ${lectors}">
                 <td th:text="${lector.firstName}"></td>
                 <td th:text="${lector.lastName}"></td>
                 <td th:text="${#lists.size(lector.departments)}"></td>
@@ -34,12 +45,10 @@
             </tr>
         </table>
 
-        <p th:unless="${not #lists.isEmpty(lectors)}">No lectors yet</p>
+        <p th:unless="${not #lists.isEmpty(allLectors)}">No lectors yet</p>
 
         <nav>
             <a class="add_btn" href="/lectors/add">Add</a>
-            <!--<span>  |  </span>-->
-            <!--<a href="">Remove</a>-->
         </nav>
     </div>
 

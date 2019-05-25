@@ -21,7 +21,6 @@ public class Department {
 
 
     @ManyToOne
-//    @JoinColumn(name = "head_of_department")
     private Lector headOfDepartment;
 
     @ManyToMany

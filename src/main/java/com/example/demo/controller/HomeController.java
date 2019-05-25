@@ -23,6 +23,8 @@ public class HomeController {
     @Autowired
     private MainService mainService;
 
+
+//    Opens(Main) main page /lectors
     @GetMapping
     public String home(){
         return "redirect:lectors";

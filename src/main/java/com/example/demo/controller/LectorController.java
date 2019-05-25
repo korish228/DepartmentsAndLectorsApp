@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.controller.service.MainService;
 import com.example.demo.model.Lector;
 import com.example.demo.repository.LectorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,14 +18,22 @@ public class LectorController {
     @Autowired
     private LectorRepository lectorRepository;
 
+    @Autowired
+    private MainService mainService;
+
     @GetMapping
-    public String lectors(Model model){
+    public String lectors(Model model, @RequestParam(defaultValue = "") String name){
         List<Lector> lectors = lectorRepository.findAll();
+
         model.addAttribute("title", "Lectors:");
-        model.addAttribute("lectors", lectors);
+        model.addAttribute("req", name);
+        model.addAttribute("lectors", this.mainService.findByName(name));
+        model.addAttribute("allLectors", this.lectorRepository.findAll());
         return "lectors/index";
     }
 
+
+//   this page for creating new lector
     @GetMapping("/add")
     public String add(Model model){
         model.addAttribute("title", "Add Lector:");
@@ -33,7 +42,6 @@ public class LectorController {
     }
 
     @PostMapping("/add")
-//    @RequestMapping(value = "/add")
     public String add(Model model, @ModelAttribute @Valid Lector lector, Errors errors){
 
 

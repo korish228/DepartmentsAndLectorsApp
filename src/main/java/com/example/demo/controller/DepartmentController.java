@@ -35,6 +35,7 @@ public class DepartmentController {
     }
 
 
+    //   this page for creating new department
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String add(Model model){
 
@@ -60,7 +61,6 @@ public class DepartmentController {
         }
 
         department.addItem(department.getHeadOfDepartment());
-
         this.departmentRepository.save(department);
         return "redirect:view/" + department.getId();
     }
@@ -68,12 +68,12 @@ public class DepartmentController {
 
 
 
+    //   this page for creating checking
     @GetMapping
     @RequestMapping("/view/{departmentId}")
     public String add(@PathVariable String departmentId, Model model){
 
         Department department = this.departmentRepository.findById(departmentId).get();
-
 
         model.addAttribute("title", "Department - " + department.getDepartmentName());
         model.addAttribute("lectors", department.getLectors());
@@ -82,7 +82,7 @@ public class DepartmentController {
         return "departments/view";
     }
 
-
+    //   this page for adding lector to departmet
     @GetMapping
     @RequestMapping("/add-item/{departmentId}")
     public String addItem(@PathVariable String departmentId, Model model){
@@ -112,6 +112,7 @@ public class DepartmentController {
         return "redirect:/departments/view/" + department.getId();
     }
 
+    //   this statistics page
     @GetMapping
     @RequestMapping("/statistics/{departmentId}")
     public String statistic(@PathVariable String departmentId, Model model){

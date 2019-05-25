@@ -14,6 +14,7 @@ public class MainServiceImpl implements MainService {
     @Autowired
     private LectorRepository lectorRepository;
 
+//    for statistic page
     public double averageSalary(Department department){
         List<Lector> lectors = this.lectorRepository.findLectorsByDepartments(department);
 
@@ -24,6 +25,12 @@ public class MainServiceImpl implements MainService {
         }
 
         return allSallary / lectors.size();
+    }
+
+//    For Searching Lectors (Basic page)
+    @Override
+    public List<Lector> findByName(String name) {
+        return this.lectorRepository.findLectorsByFirstNameLikeOrLastNameLike("%"+ name + "%","%"+ name + "%");
     }
 
 }

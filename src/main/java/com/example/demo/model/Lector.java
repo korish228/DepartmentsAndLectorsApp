@@ -15,13 +15,11 @@ public class Lector {
     @Id
     @Column(name = "lector_id")
     private String id;
-//    @Min(3)
+
     @NotNull
     @Size(min = 2)
     private String firstName;
-//    @Email
-//    @Column(unique = true)
-//    @Min(3)
+
     @NotNull
     @Size(min = 2)
     private String lastName;

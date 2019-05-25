@@ -13,17 +13,11 @@ import java.util.List;
 public interface LectorRepository extends JpaRepository<Lector, String> {
     Lector findLectorById(String id);
 
-
     List<Lector> findLectorsByDegreeAndDepartments(Enum degree, Department department);
 
     List<Lector> findLectorsByDepartments(Department department);
 
-    List<Lector> findLectorsByFirstNameLikeOrLastNameLike(String firstName, String LastName);
+    List<Lector> findLectorsByFirstNameLikeOrLastNameLike(String firstName,String lastName );
 
-    @Query(value="select * from lectos l where u.first_name like %:keyword% or l.last_name like %:keyword%", nativeQuery=true)
-    List<Lector> search(@Param("keyword") String keyword);
 //
-//    List<Lector> findAllByDegree_AssosiateProfessor();
-//
-//    List<Lector> findAllByDegree_Professor();
 }
