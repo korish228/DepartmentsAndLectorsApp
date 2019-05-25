@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.controller.service.MainService;
+import com.example.demo.service.MainService;
 import com.example.demo.model.Lector;
 import com.example.demo.repository.LectorRepository;
 import org.springframework.beans.factory.annotation.Autowired;

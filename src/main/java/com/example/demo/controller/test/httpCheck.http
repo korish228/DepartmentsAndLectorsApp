@@ -1,5 +1,0 @@
-
-# API all users
-
-GET {{host-url}}//users
-Content-Type: application/json

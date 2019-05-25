@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.controller.service.MainService;
+import com.example.demo.service.MainService;
 import com.example.demo.model.AddMenuItemForm;
 import com.example.demo.model.Department;
 import com.example.demo.model.Lector;
