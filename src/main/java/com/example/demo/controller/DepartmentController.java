@@ -51,7 +51,7 @@ public class DepartmentController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String add(Model model , @ModelAttribute @Valid Department department , Errors errors){
-        System.out.println(department);
+//        System.out.println(department);
 
         if (errors.hasErrors()){
             model.addAttribute("title", "Add new Department");

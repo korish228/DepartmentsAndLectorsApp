@@ -14,13 +14,14 @@ public class Department {
     @Id
     @Column(name = "department_id")
     private String id;
-    @Column(name = "department_name", unique = true)
+
+    @Column(name = "department_name")
     @NotNull
     @Size(min = 2)
     private String departmentName;
 
-
     @ManyToOne
+    @NotNull
     private Lector headOfDepartment;
 
     @ManyToMany
